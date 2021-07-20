@@ -28,9 +28,13 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
   Study the code for counter1 and counter2, then answer the questions below.
   
   1. What is the difference between counter1 and counter2?
+
+  The difference between counter one and counter two is the fact that a variable is being assigned in the function itself within counter one
   
   2. Which of the two uses a closure? How can you tell?
   
+Counter one would use a closure and the way that you can tell is the placement of "let"
+
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?  
 */
@@ -62,10 +66,11 @@ Use the inning function below to do the following:
 NOTE: This will be a callback function for the tasks below
 */
 
-function inning(/*Code Here*/){
-    /*Code Here*/
+function inning(points){
+  return Math.floor(Math.random() * Math.floor(3));
 }
 
+console.log(`task 2`, inning(3));
 
 /* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
 Use the finalScore function below to do the following:
@@ -81,19 +86,40 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(/*code Here*/){
-  /*Code Here*/
+function finalScore(inningcb, inningNumber){
+   let homeScore = 0;
+   let awayScore = 0;
+  
+   for(let i = 0; i < inningNumber; i++){
+     homeScore = homeScore + inningcb();
+     awayScore = awayScore + inningcb();
 }
+
+  return {
+    Home: homeScore,
+    Away: awayScore
+  } 
+}
+
+console.log(`task 3`, finalScore(inning, 9));
+
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
   1. Receive a callback function - you will pass in the inning function from task 2 as your argument 
   2. Return an object with a score for home and a score for away that populates from invoking the inning callback function */
 
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
+function getInningScore(inningcb) {
+ 
+  return {
+    Home: inning(),
+    Away: inning()
+  }
 }
 
+
+
+console.log(`task 4`, getInningScore(inning));
 
 /* ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
 Use the scoreboard function below to do the following:
@@ -136,11 +162,30 @@ Use the scoreboard function below to do the following:
 ]  
   */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(getInningcb, inningcb, inningNumber) {
+  let endGame = [];
+  let homeScore = 0;
+  let awayScore = 0;
+
+  for(let i = 0; i < inningNumber; i++){
+    const currentScore = getInningcb(inningcb);
+    homeScore += currentScore.home;
+    awayScore += currentScore.away;
+
+    endGame.push(`Inning ${1 + i}: Away: ${currentScore.away} - Home: ${currentScore.home}`);
+
+  } if (awayScore === homeScore){
+
+    endGame.push(`This game will require more innings Away: ${awayScore} - Home: ${homeScore}`);
+
+  } else{
+    
+    endGame.push(`Final Score Away: ${awayScore} - Home: ${homeScore}`);
+  }
+  return endGame;
 }
 
-
+console.log(`task 5`, scoreboard(getInningScore, inning, 9));
 
 
 /* 🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑 */

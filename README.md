@@ -80,9 +80,16 @@ dansRoll();
 ```
 
 a. Where is closure used in this code? How can you tell?
+
+Closure is found on the const on the outside of the function and I could tell because this is where the function is actually being called on 
+
 b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
+
+What's always the same is who's dice is being rolled and what is changing is the number that comes out as a result of the rolls
+
 c. What is the lexical scope of `newRoll`? 
 
+The lexical scope of newRoll is within the function personaldice 
 
 ### Task 3 - Stretch Goals
 
